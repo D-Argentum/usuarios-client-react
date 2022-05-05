@@ -1,0 +1,28 @@
+GET http://localhost:3001/tareas
+
+###
+
+POST http://localhost:3001/tareas
+Content-Type: application/json
+
+{
+    "id": 3,
+    "name": "Julio",
+    "puntos": 88,
+    "materia": "Dev Software",
+    "fechaEntrega": "2022-03-29"
+}
+
+### 
+
+PUT http://localhost:3001/tareas/6268913ed90ae6ba434352b4
+Content-Type: application/json 
+
+{
+    "name": "Leonardo"
+}
+
+###
+
+DELETE  http://localhost:3001/tareas/2
+Content-Type: application/json
