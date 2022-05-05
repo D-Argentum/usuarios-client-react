@@ -1,3 +1,4 @@
+//require("dotenv").config()
 import { useEffect, useState } from "react";
 import Tarea from "./tarea";
 import TareasForm from "./tareasForm"
@@ -12,7 +13,7 @@ const TareasList = () => {
 
     // Hook para editar varibles de estado
     useEffect(() => {
-        fetch("http://localhost:3001/tareas")
+        fetch("http://localhost:3001/tareas/")
             .then((res) => res.json())
             .then((data) => setTareas(data.data))
             .catch((err) => console.log(`Error: ${err}`));
@@ -27,7 +28,7 @@ const TareasList = () => {
 
     const createTarea = (data) => {
         try {
-            fetch("http://localhost:3001/tareas", {
+            fetch("http://localhost:3001/tareas/", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
