@@ -13,14 +13,14 @@ const TareasList = () => {
 
     // Hook para editar varibles de estado
     useEffect(() => {
-        fetch("http://localhost:3001/tareas/")
+        fetch("https://tareas-api-devsoft.azurewebsites.net/tareas/")
             .then((res) => res.json())
             .then((data) => setTareas(data.data))
             .catch((err) => console.log(`Error: ${err}`));
     }, []);
 
     const getTareas = () => {
-        fetch("http://localhost:3001/tareas/")
+        fetch("https://tareas-api-devsoft.azurewebsites.net/tareas")
             .then((res) => res.json())
             .then((data) => setTareas(data.data))
             .then((err) => console.log(`Error: ${err}`));
@@ -28,7 +28,7 @@ const TareasList = () => {
 
     const createTarea = (data) => {
         try {
-            fetch("http://localhost:3001/tareas/", {
+            fetch("https://tareas-api-devsoft.azurewebsites.net/tareas", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ const TareasList = () => {
 
     const deleteTarea = (data) => {
         try {
-            fetch(`http://localhost:3001/tareas/${data}`, {
+            fetch(`https://tareas-api-devsoft.azurewebsites.net/tareas/${data}`, {
                 method: "DELETE"
             })
                 .then(response => response.json())
@@ -65,7 +65,7 @@ const TareasList = () => {
 
     const updateTarea = (data) => {
         try {
-            fetch(`http://localhost:3001/tareas/${data._id}`, {
+            fetch(`https://tareas-api-devsoft.azurewebsites.net/tareas/${data._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
