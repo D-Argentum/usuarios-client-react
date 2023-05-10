@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import TareasList from './components/tareasList'
+import UsuariosList from './components/usuariosList'
 
 function App() {
     return (
@@ -10,7 +10,7 @@ function App() {
                 Lista de Tareas
             </h1>
 
-            <TareasList />
+            <UsuariosList />
         </div>
     );
 }
