@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form, Container, Row, Col } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 
-const UsuariosForm = ({ onClickFn }) => {
+const TareasForm = ({ onClickFn }) => {
 
     const [id, setId] = useState("");
     const [name, setName] = useState("");
@@ -68,4 +68,4 @@ const UsuariosForm = ({ onClickFn }) => {
     )
 }
 
-export default UsuariosForm;
+export default TareasForm;

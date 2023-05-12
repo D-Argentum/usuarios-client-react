@@ -1,23 +1,26 @@
+//require("dotenv").config()
 import { useEffect, useState } from "react";
-import Usuario from "./usuario";
-import UsuariosForm from "./usuariosForm"
+import Usuario from "./Usuario";
+import TareasForm from "./tareasForm"
 import { Button } from 'react-bootstrap';
+
 
 const UsuariosList = () => {
 
-    const [usuarios, setUsuarios] = useState([]);
+
+    const [Usuarios, setUsuarios] = useState([]);
     const [showForm, setShowForm] = useState(false);
 
     // Hook para editar varibles de estado
     useEffect(() => {
-        fetch("https://apirestusuariosplata.azurewebsites.net/usuarios/")
+        fetch("http://localhost:4000/usuarios")
             .then((res) => res.json())
             .then((data) => setUsuarios(data.data))
             .catch((err) => console.log(`Error: ${err}`));
     }, []);
 
     const getUsuarios = () => {
-        fetch("https://apirestusuariosplata.azurewebsites.net/usuarios")
+        fetch("https://Usuarios-api-devsoft.azurewebsites.net/Usuarios")
             .then((res) => res.json())
             .then((data) => setUsuarios(data.data))
             .then((err) => console.log(`Error: ${err}`));
@@ -25,7 +28,7 @@ const UsuariosList = () => {
 
     const createUsuario = (data) => {
         try {
-            fetch("https://apirestusuariosplata.azurewebsites.net/usuarios", {
+            fetch("https://Usuarios-api-devsoft.azurewebsites.net/Usuarios", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -34,7 +37,7 @@ const UsuariosList = () => {
             })
                 .then(response => response.json())
                 .then(dataResponse => {
-                    setUsuarios([...usuarios, dataResponse.data]);
+                    setUsuarios([...Usuarios, dataResponse.data]);
                     setShowForm(false);
                 });
         } catch (err) {
@@ -44,13 +47,13 @@ const UsuariosList = () => {
 
     const deleteUsuario = (data) => {
         try {
-            fetch(`https://apirestusuariosplata.azurewebsites.net/usuarios/${data}`, {
+            fetch(`https://Usuarios-api-devsoft.azurewebsites.net/Usuarios/${data}`, {
                 method: "DELETE"
             })
                 .then(response => response.json())
                 .then(dataResponse => {
                     console.log(dataResponse)
-                    // setUsuarios([...usuarios, dataResponse.data])
+                    // setUsuarios([...Usuarios, dataResponse.data])
                 })
                 .then(() => {
                     getUsuarios()
@@ -62,7 +65,7 @@ const UsuariosList = () => {
 
     const updateUsuario = (data) => {
         try {
-            fetch(`https://apirestusuariosplata.azurewebsites.net/usuarios/${data._id}`, {
+            fetch(`https://Usuarios-api-devsoft.azurewebsites.net/Usuarios/${data._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -71,7 +74,7 @@ const UsuariosList = () => {
             })
                 .then(response => response.json())
                 .then(dataResponse => {
-                    //setUsuarios(usuarios.map(usuario => usuario.id === dataResponse.data.id ? dataResponse.data : usuario));
+                    //setUsuarios(Usuarios.map(Usuario => Usuario.id === dataResponse.data.id ? dataResponse.data : Usuario));
                     setShowForm(false);
                 }).then(() => {
                     getUsuarios()
@@ -81,24 +84,24 @@ const UsuariosList = () => {
         }
     }
 
+    // Regreso dinamico de informacion
     return (
         <div>
-            {usuarios.map((usuario, index) =>(
-                <Usuario key={index} index={index} usuario = {usuario} onDelete={deleteUsuario} onUpdate={updateUsuario}
+            {Usuarios.map((usuario, index) => (
+                <Usuario
+                    key={index}
+                    index={index}
+                    Usuario={usuario}
+                    onDelete={deleteUsuario}
+                    onUpdate={updateUsuario}
                 />
             ))}
-            <h1>Usuarios</h1>
-            <hr></hr>
-            <Button variant="primary" className="new-btn" onClick={() => setShowForm(!showForm)}>
-                {showForm ? "Close" : "Add New User"}
+            <br></br>
+            <Button variant="primary" onClick={() => setShowForm(!showForm)}>
+                {showForm ? "Close" : "Create Homework"}
             </Button>
+            {showForm && <TareasForm onClickFn={createUsuario}></TareasForm>}
             <br></br>
-            <br></br>
-            {showForm && <UsuariosForm onClickFn={createUsuario} />}
-            <hr></hr>
-            {usuarios.map((usuario) => (
-                <Usuario key={usuario._id} usuario={usuario} onDelete={deleteUsuario} onUpdate={updateUsuario} />
-            ))}
         </div>
     )
 }
